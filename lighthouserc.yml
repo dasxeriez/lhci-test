@@ -1,0 +1,32 @@
+ci:
+  collect:
+    numberOfRuns: 3
+    url:
+      - https://acm-corporate-welfare-lending-fe-dev.public-a-cloud1n.ascendnano.io/acm-corporate-welfare-lending-fe/#/
+      - https://acm-corporate-welfare-lending-fe-dev.public-a-cloud1n.ascendnano.io/acm-corporate-welfare-lending-fe/#/application
+    settings:
+      emulatedFormFactor: mobile
+      maxWaitForLoad: 90000
+      chromeFlags: "--ignore-certificate-errors --no-sandbox"
+  assert:
+    preset: lighthouse:recommended
+    assertions:
+      categories:performance:
+        - warn
+        - minScore: 0.9
+      categories:accessibility:
+        - warn
+        - minScore: 1
+      first-contentful-paint:
+        - error
+        - maxNumericValue: 2000
+          aggregationMethod: optimistic
+      interactive:
+        - error
+        - maxNumericValue: 5000
+          aggregationMethod: optimistic
+  upload:
+    target: lhci
+    serverBaseUrl: "https://secure-lhci-server.private-a-cloud1n.ascendmoney.io"
+    token: "d1f48157-f57f-4789-a539-5b6d1afbfe59"
+    admin: "8SXxTckWemyfblR5c3i0li6llwEca0zLL3jYn2mJ"
